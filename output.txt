@@ -1,0 +1,128 @@
+Building api
+Step 1/6 : FROM node:alpine
+ ---> ef7d474eab14
+Step 2/6 : WORKDIR '/app'
+ ---> Using cache
+ ---> 0574fdd42df3
+Step 3/6 : COPY ./package.json ./
+ ---> Using cache
+ ---> ab5ae277687a
+Step 4/6 : RUN npm install
+ ---> Using cache
+ ---> 461ecfc5e84a
+Step 5/6 : COPY ./ ./
+ ---> Using cache
+ ---> c92f92afe6ba
+Step 6/6 : CMD ["npm", "run", "dev"]
+ ---> Using cache
+ ---> 75e27a444922
+Successfully built 75e27a444922
+Successfully tagged complex_api:latest
+Building nginx
+Step 1/2 : FROM nginx
+ ---> f949e7d76d63
+Step 2/2 : COPY ./default.conf /etc/nginx/conf.d/default.conf
+ ---> Using cache
+ ---> 40fe47db75d6
+Successfully built 40fe47db75d6
+Successfully tagged complex_nginx:latest
+Building client
+Step 1/6 : FROM node:alpine
+ ---> ef7d474eab14
+Step 2/6 : WORKDIR '/app'
+ ---> Using cache
+ ---> 0574fdd42df3
+Step 3/6 : COPY ./package.json ./
+ ---> Using cache
+ ---> 1788d9b2fbf1
+Step 4/6 : RUN npm install
+ ---> Using cache
+ ---> 28d06dc4df9f
+Step 5/6 : COPY ./ ./
+ ---> Using cache
+ ---> ca4eb346587f
+Step 6/6 : CMD ["npm", "run", "start"]
+ ---> Using cache
+ ---> 121117d65b8c
+Successfully built 121117d65b8c
+Successfully tagged complex_client:latest
+Building worker
+Step 1/6 : FROM node:alpine
+ ---> ef7d474eab14
+Step 2/6 : WORKDIR '/app'
+ ---> Using cache
+ ---> 0574fdd42df3
+Step 3/6 : COPY ./package.json ./
+ ---> Using cache
+ ---> 29c496136c65
+Step 4/6 : RUN npm install
+ ---> Using cache
+ ---> e27d8ddf7496
+Step 5/6 : COPY . .
+ ---> Using cache
+ ---> b63ca1a625bd
+Step 6/6 : CMD ["npm", "run", "dev"]
+ ---> Using cache
+ ---> 85e0df9c9dcf
+Successfully built 85e0df9c9dcf
+Successfully tagged complex_worker:latest
+Starting complex_api_1 ... 
+Starting complex_client_1 ... 
+Starting complex_worker_1 ... 
+Starting complex_postgres_1 ... 
+Starting complex_nginx_1    ... 
+Starting complex_redis_1    ... 
+[4A[2KStarting complex_worker_1   ... [32mdone[0m[4B[6A[2KStarting complex_api_1      ... [32mdone[0m[6B[5A[2KStarting complex_client_1   ... [32mdone[0m[5B[1A[2KStarting complex_redis_1    ... [32mdone[0m[1B[3A[2KStarting complex_postgres_1 ... [32mdone[0m[3B[2A[2KStarting complex_nginx_1    ... [32mdone[0m[2BAttaching to complex_worker_1, complex_api_1, complex_client_1, complex_redis_1, complex_postgres_1, complex_nginx_1
+[35mredis_1     |[0m 1:C 10 Oct 2019 10:00:15.941 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+[35mredis_1     |[0m 1:C 10 Oct 2019 10:00:15.941 # Redis version=5.0.6, bits=64, commit=00000000, modified=0, pid=1, just started
+[35mredis_1     |[0m 1:C 10 Oct 2019 10:00:15.941 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+[35mredis_1     |[0m 1:M 10 Oct 2019 10:00:15.949 * Running mode=standalone, port=6379.
+[35mredis_1     |[0m 1:M 10 Oct 2019 10:00:15.952 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+[35mredis_1     |[0m 1:M 10 Oct 2019 10:00:15.954 # Server initialized
+[35mredis_1     |[0m 1:M 10 Oct 2019 10:00:15.955 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+[35mredis_1     |[0m 1:M 10 Oct 2019 10:00:15.957 * DB loaded from disk: 0.001 seconds
+[31mpostgres_1  |[0m 2019-10-10 10:00:16.113 UTC [1] LOG:  starting PostgreSQL 12.0 (Debian 12.0-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit
+[31mpostgres_1  |[0m 2019-10-10 10:00:16.113 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+[31mpostgres_1  |[0m 2019-10-10 10:00:16.114 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+[31mpostgres_1  |[0m 2019-10-10 10:00:16.121 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+[31mpostgres_1  |[0m 2019-10-10 10:00:16.158 UTC [21] LOG:  database system was shut down at 2019-10-10 10:00:01 UTC
+[33mapi_1       |[0m 
+[33mapi_1       |[0m > @ dev /app
+[33mapi_1       |[0m > nodemon
+[33mapi_1       |[0m 
+[33mapi_1       |[0m [33m[nodemon] 1.18.3[39m
+[36mworker_1    |[0m 
+[36mworker_1    |[0m > @ dev /app
+[36mworker_1    |[0m > nodemon
+[36mworker_1    |[0m 
+[36mworker_1    |[0m [33m[nodemon] 1.18.3[39m
+[33mapi_1       |[0m [33m[nodemon] to restart at any time, enter `rs`[39m
+[33mapi_1       |[0m [33m[nodemon] watching: *.*[39m
+[36mworker_1    |[0m [33m[nodemon] to restart at any time, enter `rs`[39m
+[36mworker_1    |[0m [33m[nodemon] watching: *.*[39m
+[33mapi_1       |[0m [32m[nodemon] starting `node index.js`[39m
+[32mclient_1    |[0m 
+[32mclient_1    |[0m > client@0.1.0 start /app
+[32mclient_1    |[0m > react-scripts start
+[32mclient_1    |[0m 
+[32mclient_1    |[0m Starting the development server...
+[32mclient_1    |[0m 
+[32mclient_1    |[0m Compiled successfully!
+[32mclient_1    |[0m 
+[32mclient_1    |[0m You can now view client in the browser.
+[32mclient_1    |[0m 
+[32mclient_1    |[0m   Local:            http://localhost:3000/
+[32mclient_1    |[0m   On Your Network:  http://172.20.0.2:3000/
+[32mclient_1    |[0m 
+[32mclient_1    |[0m Note that the development build is not optimized.
+[32mclient_1    |[0m To create a production build, use npm run build.
+[34mnginx_1     |[0m 192.168.99.1 - - [10/Oct/2019:10:00:37 +0000] "POST /api/values HTTP/1.1" 200 16 "http://192.168.99.100:3050/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36" "-"
+[34mnginx_1     |[0m 192.168.99.1 - - [10/Oct/2019:10:00:52 +0000] "POST /api/values HTTP/1.1" 200 16 "http://192.168.99.100:3050/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36" "-"
+[34mnginx_1     |[0m 192.168.99.1 - - [10/Oct/2019:10:00:58 +0000] "POST /api/values HTTP/1.1" 200 16 "http://192.168.99.100:3050/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36" "-"
+Stopping complex_worker_1   ... 
+Stopping complex_nginx_1    ... 
+Stopping complex_client_1   ... 
+Stopping complex_api_1      ... 
+Stopping complex_postgres_1 ... 
+Stopping complex_redis_1    ... 
+[5A[2KStopping complex_nginx_1    ... [32mdone[0m[5B[1A[2KStopping complex_redis_1    ... [32mdone[0m[1B[2A[2KStopping complex_postgres_1 ... [32mdone[0m[2B[4A[2KStopping complex_client_1   ... [32mdone[0m[4B[6A[2KStopping complex_worker_1   ... [32mdone[0m[6B[3A[2KStopping complex_api_1      ... [32mdone[0m[3BGracefully stopping... (press Ctrl+C again to force)
