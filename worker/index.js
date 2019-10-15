@@ -11,10 +11,12 @@ const sub = redisClient.duplicate();
 function fib(index) {
   if (index < 2) return 1;
   console.log("Calculating "+index);	
-  return fib(index - 1) + fib(index - 2);
+  val = fib(index - 1) + fib(index - 2);
+  console.log("Calculating for "+index+" value is "+val);	
+  return val;	
 }
 
 sub.on('message', (channel, message) => {
   redisClient.hset('values', message, fib(parseInt(message)));
 });
-sub.subscribe('insert');
+sub.subscribe('abracadabra');
