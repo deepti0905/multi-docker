@@ -16,6 +16,7 @@ after_success:
           #log in to the docker CLI
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
           #Take those images to docker hub
+          #Adding comment to try again
         - docker push dpuri0905/multi-client
         - docker push dpuri0905/multi-nginx
         - docker push dpuri0905/multi-server
